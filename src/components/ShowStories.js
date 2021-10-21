@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
+import styled from 'styled-components';
 
 import Story from './Story';
 import { getStories } from './../utils/apis';
@@ -21,10 +22,10 @@ const ShowStories = ({ type }) => {
     .catch(err => console.error(err));
   };
 
-  const loader = <div className="message">Loading...</div>;
+  const loader = <Message>Loading...</Message>;
 
   return(
-    <div>
+    <>
       <InfiniteScroll
         pageStart={0}
         loadMore={() => loadMore()}
@@ -37,8 +38,17 @@ const ShowStories = ({ type }) => {
           <Story key={story.id} story={story} />
         ))}
       </InfiniteScroll>
-    </div>
+    </>
   );
 };
 
 export default ShowStories;
+
+const Message = styled.div`
+  position: relative;
+  transform: translate(-5%, -5%);
+  font-size: 20px;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+`;
