@@ -7,13 +7,13 @@ const Header = () => {
     <>
       <HeaderTitle>Hacker News Clone</HeaderTitle>
       <Navigation>
-        <NavLink to="/top">
+        <NavLink to="/top" activeStyle={{fontWeight: "bold", textDecoration: "underline"}}>
           Top Stories
         </NavLink>
-        <NavLink to="/new">
+        <NavLink to="/new" activeStyle={{fontWeight: "bold", textDecoration: "underline"}}>
           New Stories
         </NavLink>
-        <NavLink to="/best">
+        <NavLink to="/best" activeStyle={{fontWeight: "bold", textDecoration: "underline"}}>
           Best Stories
         </NavLink>
       </Navigation>
