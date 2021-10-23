@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import styled from 'styled-components';
 
@@ -6,7 +6,7 @@ import Story from './Story';
 import { getStories } from './../utils/apis';
 
 const ShowStories = ({ type }) => {
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
   const [newsList, setNewsList] = useState([]);
 
   const loadMore = () => {
@@ -22,7 +22,17 @@ const ShowStories = ({ type }) => {
     .catch(err => console.error(err));
   };
 
-  const loader = <Message>Loading...</Message>;
+  const loader = <Message key={0}>Loading...</Message>;
+
+  useEffect(() => {
+    const f = async () => {
+      const stories = await getStories(type ? type : 'top', 10);
+      console.log("useEffect!");
+      setNewsList([...stories]);
+      setHasMore(true);
+    };
+    f();
+  }, [type]);
 
   return(
     <>
