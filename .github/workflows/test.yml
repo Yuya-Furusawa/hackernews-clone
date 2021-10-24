@@ -1,0 +1,16 @@
+name: test
+on: [push]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: node:latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: |
+          npm install
+        working-directory: app
+      - name: Test
+        run: npm run test
