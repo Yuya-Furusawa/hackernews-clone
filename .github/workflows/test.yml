@@ -11,6 +11,5 @@ jobs:
       - name: Install Dependencies
         run: |
           npm install
-        working-directory: app
       - name: Test
         run: npm run test
