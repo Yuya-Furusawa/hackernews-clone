@@ -1,6 +1,7 @@
 FROM node:16-alpine as build
 WORKDIR /build
 COPY . .
+RUN npm install react-scripts
 RUN npm run build
 
 FROM node:16-alpine as prd
