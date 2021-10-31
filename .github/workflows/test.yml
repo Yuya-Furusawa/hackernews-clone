@@ -22,6 +22,10 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
+      - name: ecspresso workflow
+        uses: kayac/ecspresso@v1
+        with:
+          version: latest
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -41,3 +45,6 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$TAG"
+      - name: Deploy
+        run: |
+          ecspresso deploy --config deploy/config.yml
