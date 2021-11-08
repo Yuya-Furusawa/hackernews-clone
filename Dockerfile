@@ -1,9 +1,3 @@
-FROM node:16-alpine as dev
-WORKDIR /app
-COPY . .
-RUN npm install
-CMD ["npm", "run", "start"]
-
 FROM node:16-alpine as build
 WORKDIR /build
 COPY . .
@@ -13,7 +7,6 @@ RUN npm run build
 FROM node:16-alpine as prd
 WORKDIR /app
 COPY --from=build /build/build ./build/
-COPY --from=build /build/migrations migrations
 COPY --from=build /build/server.js .
 RUN addgroup nodegroup \
     && adduser -D -G nodegroup nodeuser \
